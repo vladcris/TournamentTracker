@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using TrackerLibrary;
+using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
@@ -15,24 +17,61 @@ namespace TrackerUI
             InitializeComponent();
         }
 
-        private void headerLabel_Click(object sender, EventArgs e)
+        private void createMemberButton_Click(object sender, EventArgs e)
         {
+            if (ValidateForm())
+            {
+                PersonModel model = new PersonModel(
+                                               firstNameValue.Text,
+                                               lastNameValue.Text,
+                                               emailValue.Text,
+                                               cellphoneValue.Text
+                                               );
+
+                GlobalConfig.Connection.CreatePerson(model);
+
+                firstNameValue.Text = "";
+                lastNameValue.Text = "";
+                emailValue.Text = "";
+                cellphoneValue.Text = "";
+
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong, complete all fields");
+            }
+            
+           
 
         }
 
-        private void CreateTeamForm_Load(object sender, EventArgs e)
+        private bool ValidateForm()
         {
+           
+            if (firstNameValue.Text.Length == 0)
+            {
+                return false;
+            }
 
+            if (lastNameValue.Text.Length == 0)
+            {
+                return false;
+            }
+
+            if (emailValue.Text.Length == 0)
+            {
+                return false;
+            }
+
+            if (cellphoneValue.Text.Length == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        private void newMemberBox_Enter(object sender, EventArgs e)
-        {
 
-        }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -148,7 +148,6 @@ namespace TrackerUI
             this.orLabel.Size = new System.Drawing.Size(48, 30);
             this.orLabel.TabIndex = 28;
             this.orLabel.Text = "-or-";
-            this.orLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // CreatePrizeForm
             // 
@@ -171,7 +170,6 @@ namespace TrackerUI
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "CreatePrizeForm";
             this.Text = "Create Prize";
-            this.Load += new System.EventHandler(this.CreatePrizeForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
