@@ -50,6 +50,34 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             return output;
         }
 
+        public static List<TeamModel> ConvertToTeamModel(this List<String> lines, string fileName)
+        {
+            List<TeamModel> output = new List<TeamModel>();
+            List<PersonModel> people = fileName.FullFilePath().LoadFile().ConverToPersonModel();
+
+            foreach (string line in lines)
+            {
+                string[] cols = line.Split(',');
+
+                TeamModel p = new TeamModel();
+                p.Id = int.Parse(cols[0]);
+                p.TeamName = cols[1];
+
+                string[] personIds = cols[2].Split('|');
+
+                foreach (string  id  in personIds)
+                {
+                    p.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First());
+                        
+                }
+
+            }
+
+            return output;
+
+        }
+
+
         public static List<PersonModel> ConverToPersonModel(this List<string> lines)
         {
             List<PersonModel> output = new List<PersonModel>();
@@ -94,6 +122,37 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);
+        }
+
+        public static void SaveToTeamModel(this List<TeamModel> models, string fileName)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (TeamModel team in models)
+            {
+                lines.Add($"{team.Id},{team.TeamName},{ConvertPeopleListToString(team.TeamMembers)}");
+            }
+
+            File.WriteAllLines(fileName.FullFilePath(), lines);
+        }
+
+        private static string ConvertPeopleListToString(List<PersonModel> people)
+        {
+            string personIds = "";
+
+            if (people.Count == 0)
+            {
+                return "";
+            }
+
+            foreach (PersonModel person in people)
+            {
+                personIds += $"{person.Id}|";
+            }
+
+            personIds = personIds.Substring(0, personIds.Length - 1); //delete the last pipe from last id
+
+            return personIds;
         }
 
     }

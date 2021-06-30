@@ -23,5 +23,13 @@ namespace TrackerLibrary.Models
             CellphoneNumber = cellPhoneNumber;
         }
 
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+
     }
 }
