@@ -71,6 +71,8 @@ namespace TrackerLibrary.DataAccess.TextHelpers
                         
                 }
 
+                output.Add(p);
+
             }
 
             return output;
