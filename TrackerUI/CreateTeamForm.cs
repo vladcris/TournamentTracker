@@ -69,17 +69,17 @@ namespace TrackerUI
 
                 selectedTeamMembers.Add(model);
 
-               // WireUpLists();
+                WireUpLists();
 
-                //firstNameValue.Text = "";
-                //lastNameValue.Text = "";
-                //emailValue.Text = "";
-                //cellphoneValue.Text = "";
+                firstNameValue.Text = "";
+                lastNameValue.Text = "";
+                emailValue.Text = "";
+                cellphoneValue.Text = "";
 
             }
             else
             {
-                MessageBox.Show("Something went wrong, complete all fields");
+                MessageBox.Show("Complete all fields");
             }
             
            
